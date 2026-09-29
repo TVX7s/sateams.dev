@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>team SA</title>
+<link rel="stylesheet" href="sty-index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+:root{--bg-color:#0b0f19;--card-bg:rgba(18,24,38,0.7);--primary:#3b82f6;--accent:#8b5cf6;--text:#ffffff;--text-secondary:#94a3b8;--border:rgba(255,255,255,0.08);--glow:rgba(59,130,246,0.3)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}
+body{background-color:var(--bg-color);color:var(--text);overflow-x:hidden;direction:rtl}
+.navbar{position:fixed;top:0;left:0;width:100%;background:rgba(11,15,25,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000;transition:all 0.4s ease}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:15px 30px}
+.nav-logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.25rem;color:var(--text)}
+.nav-logo i{animation:saFloat 3s ease-in-out infinite;color:var(--primary);font-size:1.4rem}
+.nav-logo span{animation:saGlow 3s ease-in-out infinite;background:linear-gradient(135deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes saFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-4px) rotate(5deg)}}
+@keyframes saGlow{0%,100%{filter:drop-shadow(0 0 2px rgba(96,165,250,0.4))}50%{filter:drop-shadow(0 0 10px rgba(167,139,250,0.8))}}
+.nav-links{display:flex;gap:25px;align-items:center}
+.nav-link{display:flex;align-items:center;gap:8px;color:var(--text-secondary);text-decoration:none;font-weight:500;font-size:0.95rem;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);padding:8px 14px;border-radius:10px}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.05);transform:translateY(-2px)}
+.nav-link i{color:var(--primary);transition:transform 0.3s ease}
+.nav-link:hover i{transform:scale(1.15)}
+.menu-toggle{display:none;flex-direction:column;gap:6px;cursor:pointer;z-index:1001;padding:5px}
+.menu-toggle span{width:28px;height:2px;background:var(--text);transition:0.3s;border-radius:2px}
+.mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:#0e1320;backdrop-filter:blur(20px);border-left:1px solid var(--border);z-index:1002;transition:0.5s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;padding:30px 20px}
+.mobile-menu.active{right:0}
+.mobile-menu-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}
+.mobile-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.2rem;color:var(--text)}
+.mobile-menu-items{list-style:none;display:flex;flex-direction:column;gap:15px}
+.mobile-menu-items li a{display:flex;align-items:center;gap:12px;color:var(--text-secondary);text-decoration:none;font-size:1.05rem;padding:12px 16px;border-radius:12px;transition:0.3s;background:rgba(255,255,255,0.02)}
+.mobile-menu-items li a:hover{color:var(--text);background:rgba(59,130,246,0.1);transform:translateX(-5px)}
+.menu-overlay{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.6);backdrop-filter:blur(5px);z-index:999;opacity:0;visibility:hidden;transition:0.4s ease}
+.menu-overlay.active{opacity:1;visibility:visible}
+.particles-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 50% 20%,rgba(37,99,235,0.08) 0%,transparent 60%),radial-gradient(circle at 80% 80%,rgba(139,92,246,0.06) 0%,transparent 50%)}
+.content{padding-top:120px;padding-bottom:80px;max-width:1200px;margin:0 auto;padding-left:20px;padding-right:20px}
+.team-section{margin-top:20px}
+.section-header{text-align:center;margin-bottom:60px;opacity:0;transform:translateY(30px);animation:fadeInUp 1s cubic-bezier(0.16,1,0.3,1) forwards}
+.section-title{font-size:2.5rem;font-weight:800;margin-bottom:12px;background:linear-gradient(135deg,#ffffff 0%,#94a3b8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.section-subtitle{color:var(--text-secondary);font-size:1.1rem;font-weight:400}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;margin-bottom:80px}
+.member-card{background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:35px 25px;text-align:center;position:relative;backdrop-filter:blur(16px);box-shadow:0 20px 40px rgba(0,0,0,0.4);transition:all 0.5s cubic-bezier(0.16,1,0.3,1);opacity:0;transform:translateY(40px);animation:fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards}
+.member-card:nth-child(1){animation-delay:0.1s}
+.member-card:nth-child(2){animation-delay:0.25s}
+.member-card:nth-child(3){animation-delay:0.4s}
+.member-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(59,130,246,0.3);box-shadow:0 30px 60px rgba(0,0,0,0.6),0 0 30px rgba(59,130,246,0.15)}
+.member-avatar{position:relative;width:110px;height:110px;margin:0 auto 22px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 10px 25px rgba(59,130,246,0.3);transition:transform 0.5s ease}
+.member-card:hover .member-avatar{transform:scale(1.08)}
+.member-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a2234}
+.member-status{position:absolute;bottom:8px;right:8px;width:18px;height:18px;background:#10b981;border:3px solid #0b0f19;border-radius:50%;animation:luxPulse 2s infinite cubic-bezier(0.4,0,0.6,1)}
+@keyframes luxPulse{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(16,185,129,0.7)}70%{transform:scale(1);box-shadow:0 0 0 10px rgba(16,185,129,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+.member-info{margin-bottom:22px}
+.member-name{font-size:1.35rem;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-0.3px}
+.member-role{color:var(--text-secondary);font-size:0.92rem;font-weight:500;text-transform:uppercase;letter-spacing:1px}
+.member-social{display:flex;justify-content:center;gap:12px}
+.social-link{width:45px;height:45px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);text-decoration:none;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.social-link::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--primary),var(--accent));opacity:0;transition:opacity 0.4s ease}
+.social-link i{position:relative;z-index:1;font-size:1.15rem;transition:transform 0.4s ease,color 0.4s ease}
+.social-link:hover{color:#fff;border-color:transparent;transform:translateY(-4px);box-shadow:0 10px 20px rgba(59,130,246,0.3)}
+.social-link:hover::before{opacity:1}
+.social-link:hover i{transform:scale(1.2) rotate(8deg)}
+.cta-section{background:linear-gradient(180deg,transparent 0%,rgba(18,24,38,0.5) 100%);border-top:1px solid var(--border);padding:80px 20px;text-align:center;position:relative;opacity:0;transform:translateY(30px);animation:fadeInUp 1s cubic-bezier(0.16,1,0.3,1) 0.5s forwards}
+.cta-content{max-width:700px;margin:0 auto}
+.cta-content h2{font-size:2.5rem;font-weight:800;margin-bottom:12px;background:linear-gradient(135deg,#fff 0%,#cbd5e1 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cta-content p{color:var(--text-secondary);font-size:1.15rem;margin-bottom:35px}
+.cta-button{display:inline-flex;align-items:center;gap:12px;padding:18px 38px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;text-decoration:none;border-radius:18px;font-weight:700;font-size:1.1rem;position:relative;overflow:hidden;box-shadow:0 15px 35px rgba(59,130,246,0.4);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);border:1px solid rgba(255,255,255,0.2)}
+.cta-button .button-bg{position:absolute;inset:0;background:linear-gradient(135deg,#2563eb,#7c3aed);opacity:0;transition:opacity 0.4s ease}
+.cta-button i, .cta-button span{position:relative;z-index:1}
+.cta-button:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 25px 50px rgba(59,130,246,0.6)}
+.cta-button:hover .button-bg{opacity:1}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.nav-links{display:none}.menu-toggle{display:flex}.section-title{font-size:2rem}.cta-content h2{font-size:2rem}}
+</style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+<div class="nav-container">
+<div class="nav-logo">
+<i class="fas fa-code"></i>
+<span>SA</span>
+</div>
+<div class="nav-links">
+<a href="pc.html" class="nav-link">
+<i class="fas fa-desktop"></i>
+<span>هاكات PC</span>
+</a>
+<a href="macos.html" class="nav-link">
+<i class="fa-brands fa-apple"></i>
+<span>هاكات macOS</span>
+</a>
+<a href="android.html" class="nav-link">
+<i class="fab fa-android"></i>
+<span>هاكات Android</span>
+</a>
+</div>
+<div class="menu-toggle" id="menuToggle">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-header">
+<div class="mobile-logo">
+<i class="fas fa-code"></i>
+<span>SA TEAM</span>
+</div>
+</div>
+<ul class="mobile-menu-items">
+<li><a href="macos.html"><i class="fa-brands fa-apple"></i> هاكات macOS</a></li>
+<li><a href="pc.html"><i class="fas fa-desktop"></i> هاكات PC</a></li>
+<li><a href="android.html"><i class="fab fa-android"></i> هاكات Android</a></li>
+</ul>
+</div>
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="particles-bg"></div>
+<main class="content">
+<section class="team-section">
+<div class="container">
+<div class="section-header">
+<h2 class="section-title">أعضاء الفريق</h2>
+<p class="section-subtitle">تعرف على فريقنا المتميز من المطورين والخبراء</p>
+</div>
+<div class="team-grid">
+<div class="member-card">
+<div class="member-avatar">
+<img src="https://avatar-cyan.vercel.app/api/pfp/889271863300206662/image?size=1024&format=webp" alt="SA | ALONE">
+<div class="member-status"></div>
+</div>
+<div class="member-info">
+<h3 class="member-name">_0pei</h3>
+<p class="member-role">Owner</p>
+</div>
+<div class="member-social">
+<a href="https://discord.com/users/889271863300206662" target="_blank" class="social-link discord">
+<i class="fab fa-discord"></i>
+</a>
+</div>
+</div>
+<div class="member-card">
+<div class="member-avatar">
+<img src="https://avatar-cyan.vercel.app/api/pfp/1373765797616291953/image?size=1024&format=webp" alt="TVX">
+<div class="member-status"></div>
+</div>
+<div class="member-info">
+<h3 class="member-name">tvx7s</h3>
+<p class="member-role">Admin Server</p>
+</div>
+<div class="member-social">
+<a href="https://discord.com/users/1373765797616291953" target="_blank" class="social-link discord">
+<i class="fab fa-discord"></i>
+</a>
+</div>
+</div>
+<div class="member-card">
+<div class="member-avatar">
+<img src="https://avatar-cyan.vercel.app/api/pfp/1387501792715214962/image?size=1024&format=webp" alt="S7">
+<div class="member-status"></div>
+</div>
+<div class="member-info">
+<h3 class="member-name">8m0n</h3>
+<p class="member-role">Mod Server</p>
+</div>
+<div class="member-social">
+<a href="https://discord.com/users/1387501792715214962" target="_blank" class="social-link discord">
+<i class="fab fa-discord"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="cta-section">
+<div class="container">
+<div class="cta-content">
+<h2>انضم إلى ديسكورد</h2>
+<p>تواصل مع الأعضاء والفريق</p>
+<a href="https://discord.gg/e4Tuzndh6" target="_blank" class="cta-button">
+<i class="fab fa-discord"></i>
+<span>للحصول على الدعم</span>
+<div class="button-bg"></div>
+</a>
+</div>
+</div>
+</section>
+</main>
+<script>
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuOverlay = document.getElementById('menuOverlay');
+function toggleMenu(){
+mobileMenu.classList.toggle('active');
+menuOverlay.classList.toggle('active');
+}
+if(menuToggle){
+menuToggle.addEventListener('click', toggleMenu);
+menuOverlay.addEventListener('click', toggleMenu);
+}
+</script>
+</body>
+</html>
